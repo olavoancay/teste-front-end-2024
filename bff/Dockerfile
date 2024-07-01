@@ -10,6 +10,9 @@ COPY . .
 # Instale as dependências do projeto
 RUN npm install
 
+# Copie o arquivo .env para o contêiner
+COPY .env .
+
 # Comando para iniciar o servidor
 CMD ["node", "src/server.js"]
 
