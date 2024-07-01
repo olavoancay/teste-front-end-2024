@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MF Drawer</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="nav">
+        <a href="/videos">VÍDEOS</a>
+        <a href="/favoritos">FAVORITOS</a>
+    </div>
+    <div id="content">
+        <!-- O conteúdo das páginas "VÍDEOS" e "FAVORITOS" será carregado aqui -->
+    </div>
+    <script>
+        // Função para carregar o conteúdo das páginas
+        function loadContent(path) {
+            const content = document.getElementById('content');
+            content.innerHTML = `Carregando ${path}...`;
+
+            // Simula o carregamento do conteúdo
+            setTimeout(() => {
+                content.innerHTML = `<h1>${path}</h1>`;
+            }, 1000);
+        }
+
+        // Event listeners para os links
+        document.querySelectorAll('.nav a').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const path = e.target.getAttribute('href').substring(1);
+                window.history.pushState({}, '', e.target.href);
+                loadContent(path);
+            });
+        });
+
+        // Carrega o conteúdo inicial com base na URL

@@ -1,17 +1,11 @@
-# Use a imagem oficial do Node.js como base
-FROM node:14
+# Use uma imagem base do nginx
+FROM nginx:alpine
 
-# Defina o diretório de trabalho no contêiner
-WORKDIR /app
+# Copie os arquivos do projeto para o diretório padrão do nginx
+COPY src /usr/share/nginx/html
 
-# Copie os arquivos do projeto para o diretório de trabalho
-COPY . .
+# Exponha a porta 80
+EXPOSE 80
 
-# Instale as dependências do projeto
-RUN npm install
-
-# Comando para iniciar a aplicação
-CMD ["npm", "start"]
-
-# Exponha a porta 3000
-EXPOSE 3000
+# Comando padrão para rodar o nginx
+CMD ["nginx", "-g", "daemon off;"]
