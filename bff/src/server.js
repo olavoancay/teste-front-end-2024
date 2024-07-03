@@ -8,7 +8,7 @@ app.use(bodyParser.json());
 
 
 const JWT_SECRET = process.env.JWT_SECRET;
-const YOUTUBE_API_KEY = 'AIzaSyD7qCOBCKNy28Mo4Y_r9jPs-ccQPNflCgg';
+const YOUTUBE_API_KEY = process.env.YOUTUBE_API_KEY
 
 // Rota de login sem fazer validações
 app.post('/login', (req, res) => {
