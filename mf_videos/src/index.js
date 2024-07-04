@@ -1,5 +1,3 @@
-const API_KEY = 'AIzaSyD7qCOBCKNy28Mo4Y_r9jPs-ccQPNflCgg';
-
 async function fetchFavorites() {
     const response = await fetch('http://localhost:3002/favorites');
     return response.json();
@@ -25,9 +23,8 @@ function createVideoItem(video, isFavorite) {
     const videoItem = document.createElement('div');
     videoItem.className = 'video-item';
     videoItem.innerHTML = `
+        <iframe src="https://www.youtube.com/embed/${video.id.videoId}" allowfullscreen></iframe>
         <h3>${video.snippet.title}</h3>
-        <iframe width="200" height="150" src="https://www.youtube.com/embed/${video.id.videoId}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        <p>${video.snippet.description}</p>
         <button class="favorite-button ${isFavorite ? 'favorite' : ''}" data-video-id="${video.id.videoId}">⭐</button>
     `;
     return videoItem;
@@ -48,6 +45,15 @@ async function displayVideos(videos) {
             const videoId = event.target.getAttribute('data-video-id');
             const favorites = await toggleFavorite(videoId);
             event.target.classList.toggle('favorite', favorites.some(fav => fav.videoId === videoId));
+        });
+    });
+
+    document.querySelectorAll('.play-button').forEach(button => {
+        button.addEventListener('click', (event) => {
+            const videoId = event.target.getAttribute('data-video-id');
+            const player = document.getElementById('video-player');
+            player.src = `https://www.youtube.com/embed/${videoId}`;
+            player.style.display = 'block';
         });
     });
 }

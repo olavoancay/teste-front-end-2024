@@ -4,12 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MF Drawer</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="nav">
-        <a href="http://localhost:3000/videos">VÍDEOS</a>
-        <a href="http://localhost:3000/favoritos">FAVORITOS</a>
+    <div id="mf-drawer" class="closed">
+        <button class="menu-button" onclick="toggleDrawer()">☰</button>
+        <nav>
+            <a href="#" class="active">Vídeos</a>
+            <a href="#">Favoritos</a>
+        </nav>
     </div>
+    <script src="index.js"></script>
 </body>
 </html>

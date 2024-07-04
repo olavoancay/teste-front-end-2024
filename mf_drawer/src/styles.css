@@ -1,20 +1,72 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: rgb(166, 212, 250);
-}
-.nav {
+    background-color: rgb(252, 252, 252);
+    margin: 0;
+    padding: 0;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    margin-top: 50px;
+    align-items: center;
 }
 
-.nav a {
-    margin: 10px 0;
-    text-decoration: none;
-    color: #333;
-    font-size: 18px;
+#mf-drawer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 250px;
+    background-color: white;
+    box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+    z-index: 1000;
+    transition: transform 0.3s ease;
 }
-.nav a:hover {
-    color: #007BFF;
+
+#mf-drawer.closed {
+    transform: translateX(-100%);
+}
+
+#mf-drawer .menu-button {
+    display: none;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background-color: rgb(144, 202, 249);
+    border: none;
+    color: white;
+    padding: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    z-index: 1001;
+}
+
+#mf-drawer .menu-button:hover {
+    background-color: rgb(119, 181, 249);
+}
+
+#mf-drawer nav {
+    margin-top: 60px;
+}
+
+#mf-drawer nav a {
+    display: block;
+    padding: 15px 20px;
+    color: black;
+    text-decoration: none;
+    font-size: 18px;
+    border-bottom: 1px solid rgb(144, 202, 249);
+    transition: background-color 0.3s ease;
+}
+
+#mf-drawer nav a.active, #mf-drawer nav a:hover {
+    background-color: rgb(144, 202, 249);
+    color: white;
+}
+
+@media (max-width: 768px) {
+    #mf-drawer .menu-button {
+        display: block;
+    }
+
+    #mf-drawer.closed {
+        transform: translateX(-100%);
+    }
 }
