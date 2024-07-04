@@ -1,21 +1,12 @@
-async function fetchFavorites() {
-    const response = await fetch('http://localhost:3002/favorites');
-    return response.json();
-}
+document.getElementById('search-button').addEventListener('click', async () => {
+    const query = document.getElementById('search-input').value;
+    const data = await fetchVideos(query);
+    displayVideos(data.items);
+});
+
 
 async function fetchVideos(query) {
     const response = await fetch(`http://localhost:3002/videos?q=${query}`);
-    return response.json();
-}
-
-async function toggleFavorite(videoId) {
-    const response = await fetch('http://localhost:3002/favorites', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ videoId }),
-    });
     return response.json();
 }
 
@@ -24,8 +15,10 @@ function createVideoItem(video, isFavorite) {
     videoItem.className = 'video-item';
     videoItem.innerHTML = `
         <iframe src="https://www.youtube.com/embed/${video.id.videoId}" allowfullscreen></iframe>
-        <h3>${video.snippet.title}</h3>
-        <button class="favorite-button ${isFavorite ? 'favorite' : ''}" data-video-id="${video.id.videoId}">⭐</button>
+        <div class="description">
+            <h3>${video.snippet.title}</h3>
+            <button class="favorite-button ${isFavorite ? 'favorite' : ''}" data-video-id="${video.id.videoId}">⭐</button>
+        </div>
     `;
     return videoItem;
 }
@@ -40,13 +33,6 @@ async function displayVideos(videos) {
         videoList.appendChild(videoItem);
     });
 
-    document.querySelectorAll('.favorite-button').forEach(button => {
-        button.addEventListener('click', async (event) => {
-            const videoId = event.target.getAttribute('data-video-id');
-            const favorites = await toggleFavorite(videoId);
-            event.target.classList.toggle('favorite', favorites.some(fav => fav.videoId === videoId));
-        });
-    });
 
     document.querySelectorAll('.play-button').forEach(button => {
         button.addEventListener('click', (event) => {
@@ -58,11 +44,31 @@ async function displayVideos(videos) {
     });
 }
 
-document.getElementById('search-button').addEventListener('click', async () => {
-    const query = document.getElementById('search-input').value;
-    const data = await fetchVideos(query);
-    displayVideos(data.items);
-});
+async function fetchFavorites() {
+    const response = await fetch('http://localhost:3002/favorites');
+    return response.json();
+}
+
+async function toggleFavorite(videoId) {
+    const response = await fetch('http://localhost:3002/favorites', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ videoId }),
+    });
+    return response.json();
+}
+
+
+    document.querySelectorAll('.favorite-button').forEach(button => {
+        button.addEventListener('click', async (event) => {
+            const videoId = event.target.getAttribute('data-video-id');
+            const favorites = await toggleFavorite(videoId);
+            event.target.classList.toggle('favorite', favorites.some(fav => fav.videoId === videoId));
+        });
+    });
+
 
 document.addEventListener('DOMContentLoaded', async () => {
     if (window.location.pathname.includes('favoritos')) {
