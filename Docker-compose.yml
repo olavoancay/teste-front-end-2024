@@ -3,8 +3,7 @@ services:
   bff:
     build: ./bff
     ports:
-      - "3002:80"
-
+      - "3002:3002"
     env_file:
       - ./bff/src/.env
 

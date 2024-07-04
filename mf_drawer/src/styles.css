@@ -1,5 +1,6 @@
 body {
     font-family: Arial, sans-serif;
+    background-color: rgb(166, 212, 250);
 }
 .nav {
     display: flex;
@@ -7,6 +8,7 @@ body {
     justify-content: center;
     margin-top: 50px;
 }
+
 .nav a {
     margin: 10px 0;
     text-decoration: none;

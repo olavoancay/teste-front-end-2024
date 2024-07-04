@@ -9,18 +9,24 @@
             display: flex;
             flex-direction: row;
             height: 100vh;
+            background-color: rgb(236, 244, 251);
         }
         iframe {
-            width: 50%;
-            height: 100%;
+            height: 100vh;
             border: none;
+        }
+        .mf_drawer {
+            width: 20%;
+        }
+        .mf_video {
+            width: 80%;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <iframe src="http://localhost:3000"></iframe>
-        <iframe src="http://localhost:3001"></iframe>
+        <iframe src="http://localhost:3000" class="mf_drawer"></iframe>
+        <iframe src="http://localhost:3001" class="mf_video"></iframe>
     </div>
 </body>
 </html>
