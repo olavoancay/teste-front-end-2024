@@ -1,0 +1,27 @@
+version: '3'
+services:
+  bff:
+    build: ./bff
+    ports:
+      - "3002:80"
+
+    env_file:
+      - ./bff/src/.env
+
+  mf_drawer:
+    build: ./mf_drawer
+    ports:
+      - "3000:80"
+
+  mf_videos:
+    build: ./mf_videos
+    ports:
+      - "3001:80"
+
+  main_app:
+    build: ./main_app
+    ports:
+      - "80:80"
+    depends_on:
+      - mf_drawer
+      - mf_videos

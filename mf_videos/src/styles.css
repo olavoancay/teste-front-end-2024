@@ -1,0 +1,32 @@
+body {
+    font-family: Arial, sans-serif;
+}
+.search-container {
+    margin: 20px;
+}
+#video-list {
+    display: flex;
+    flex-wrap: wrap;
+}
+.video-item {
+    width: 200px;
+    margin: 10px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+}
+.video-item img {
+    width: 100%;
+}
+.favorite-button {
+    background-color: transparent;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+}
+.favorite-button.favorite {
+    color: gold;
+}
+.favorite-button:hover {
+    color: gold;
+}
